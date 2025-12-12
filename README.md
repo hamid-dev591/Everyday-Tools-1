@@ -1,2 +1,4 @@
 # Everyday-Tools-1
-vercel
+Hello, I'm Hamid, an Arabic web developer!
+
+I designed this website to help people, and don't worry, I'll update it as much as possible. It's open source. Welcome! Just don't forget to leave a star on the repository!
