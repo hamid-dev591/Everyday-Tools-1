@@ -1,28 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
 
+/* استخدام :root لتعريف المتغيرات */
+:root {
+    --main-bg: radial-gradient(circle at top, #ff7ce5, #260033);
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --primary-color: #ff69ff;
+    --hover-color: #ffe96b;
+}
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top, #ff7ce5, #260033);
+    background: var(--main-bg);
     color: white;
-    overflow-x: hidden;
+    min-height: 100vh; /* تأكد من تغطية الخلفية للصفحة بالكامل */
 }
 
 header {
     text-align: center;
-    padding: 40px 0 20px;
+    padding: 40px 15px 20px;
 }
 
 .title {
-    font-size: 42px;
+    font-size: clamp(32px, 5vw, 48px); /* استخدام clamp لخط مستجيب */
     font-weight: 800;
     letter-spacing: 2px;
-    background: linear-gradient(90deg, #ff69ff, #83f3ff);
+    background: linear-gradient(90deg, var(--primary-color), #83f3ff);
     background-clip: text;
+    -webkit-background-clip: text; /* دعم أفضل للمتصفحات */
     color: transparent;
 }
 
@@ -30,22 +41,43 @@ header {
     display: grid;
     gap: 20px;
     padding: 25px;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* تحسين العرض على الشاشات الصغيرة والكبيرة */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    max-width: 1200px;
+    margin: 0 auto; /* توسيط الحاوية */
 }
 
 .tool-card {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     backdrop-filter: blur(15px);
     border-radius: 18px;
-    padding: 20px;
-    transition: 0.25s;
+    padding: 25px; /* زيادة التباعد الداخلي */
+    transition: 0.3s ease; /* تبطيء الانتقال قليلاً */
     cursor: pointer;
+    text-align: center;
+}
+
+.tool-card i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #83f3ff; /* لون الأيقونة */
+}
+
+.tool-card h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.tool-card p {
+    opacity: 0.7;
+    margin-top: 5px;
 }
 
 .tool-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px); /* زيادة تأثير الارتفاع */
     background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* إضافة ظل بسيط */
 }
 
 /* MODAL */
@@ -55,8 +87,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.7); /* تغطية أغمق قليلاً */
+    backdrop-filter: blur(12px);
     z-index: 1000;
 }
 
@@ -65,56 +97,133 @@ header {
 }
 
 .tool-content {
-    width: 90%;
+    width: 95%; /* أفضل على الهاتف */
     max-width: 650px;
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px); /* زيادة تأثير الضبابية */
     border-radius: 18px;
-    padding: 25px;
-    border: 1px solid rgba(255,255,255,0.2);
-    animation: pop 0.25s ease;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.25);
+    animation: pop 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* حركة أكثر ديناميكية */
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 
 @keyframes pop {
-    from { opacity: 0; transform: scale(0.8); }
+    from { opacity: 0; transform: scale(0.7); }
     to { opacity: 1; transform: scale(1); }
 }
 
 .close {
-    float: right;
+    float: left; /* تم تعديل الاتجاه */
     cursor: pointer;
-    font-size: 30px;
+    font-size: 36px;
+    line-height: 1;
+    color: #ffcccc; /* لون مغلق مميز */
+    transition: color 0.2s;
 }
 
-textarea, input {
+.close:hover {
+    color: var(--primary-color);
+}
+
+/* Form Elements */
+textarea, input[type="text"], input[type="color"] {
     width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    background: rgba(255,255,255,0.20);
+    padding: 15px; /* زيادة الحجم قليلاً */
+    margin-top: 15px;
+    background: rgba(255,255,255,0.25);
     border: none;
     color: white;
-    border-radius: 10px;
+    border-radius: 12px;
+    font-size: 16px;
+    resize: vertical; /* السماح بتغيير حجم النص فقط عمودياً */
+}
+
+/* نمط خاص لمدخل اللون */
+#pickColor {
+    height: 50px;
+    padding: 0;
+    cursor: pointer;
 }
 
 button {
     width: 100%;
-    margin-top: 15px;
-    padding: 12px;
-    background: #ff69ff;
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--primary-color);
     border: none;
     color: black;
-    font-weight: 700;
-    border-radius: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 105, 255, 0.3);
 }
 
 button:hover {
-    background: #ffe96b;
+    background: var(--hover-color);
+    box-shadow: 0 4px 20px rgba(255, 233, 107, 0.5);
 }
 
+/* النتائج والعرض */
+#result, #passResult, #colorCode {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    word-break: break-all;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* منسق JSON */
+#jsonResult {
+    white-space: pre-wrap; /* يسمح بالتفاف النص */
+    word-wrap: break-word;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #0d0d0d;
+    overflow-x: auto; /* للسماح بالتمرير الأفقي إذا كان JSON كبيراً */
+    border: 1px solid #1a1a1a;
+}
+
+/* مولد QR */
+#qrOutput {
+    text-align: center;
+    margin-top: 25px;
+}
+
+#qrOutput img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
-    opacity: 0.6;
+    opacity: 0.7;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+footer a {
+    color: var(--hover-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/* الاستجابة على الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .tool-content {
+        padding: 20px;
+    }
+    .tool-card {
+        padding: 20px;
+    }
 }

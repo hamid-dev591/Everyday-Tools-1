@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Everyday Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مجموعة من الأدوات اليومية المفيدة: عداد نصوص، مولد كلمات مرور، منسق JSON، ومزيد.">
+    <title>Everyday Tools - أدوات يومية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,50 +14,56 @@
     <h1 class="title">Everyday Tools</h1>
 </header>
 
-<section class="tools">
+<main class="tools">
 
-    <div class="tool-card" data-tool="textCounter">
-        <h2>Text Counter</h2>
-        <p>Count words & characters.</p>
+    <div class="tool-card" data-tool="textCounter" role="button" aria-label="Text Counter: Count words & characters.">
+        <i class="fas fa-file-alt"></i>
+        <h2>عداد النصوص</h2>
+        <p>عد الكلمات والأحرف.</p>
     </div>
 
-    <div class="tool-card" data-tool="passwordGen">
-        <h2>Password Generator</h2>
-        <p>Create strong passwords.</p>
+    <div class="tool-card" data-tool="passwordGen" role="button" aria-label="Password Generator: Create strong passwords.">
+        <i class="fas fa-key"></i>
+        <h2>مولد كلمات المرور</h2>
+        <p>إنشاء كلمات مرور قوية.</p>
     </div>
 
-    <div class="tool-card" data-tool="qrGen">
-        <h2>QR Generator</h2>
-        <p>Generate QR codes instantly.</p>
+    <div class="tool-card" data-tool="qrGen" role="button" aria-label="QR Generator: Generate QR codes instantly.">
+        <i class="fas fa-qrcode"></i>
+        <h2>مولد رمز QR</h2>
+        <p>توليد رموز QR فوراً.</p>
     </div>
 
-    <div class="tool-card" data-tool="jsonFormatter">
-        <h2>JSON Formatter</h2>
-        <p>Clean & beautify JSON.</p>
+    <div class="tool-card" data-tool="jsonFormatter" role="button" aria-label="JSON Formatter: Clean & beautify JSON.">
+        <i class="fas fa-code"></i>
+        <h2>منسق JSON</h2>
+        <p>تنظيف وتجميل بيانات JSON.</p>
     </div>
 
-    <div class="tool-card" data-tool="notes">
-        <h2>Notes</h2>
-        <p>Save notes locally.</p>
+    <div class="tool-card" data-tool="notes" role="button" aria-label="Notes: Save notes locally.">
+        <i class="fas fa-sticky-note"></i>
+        <h2>مفكرتي</h2>
+        <p>حفظ الملاحظات محلياً.</p>
     </div>
 
-    <div class="tool-card" data-tool="colorPicker">
-        <h2>Color Picker</h2>
-        <p>Select & copy colors.</p>
+    <div class="tool-card" data-tool="colorPicker" role="button" aria-label="Color Picker: Select & copy colors.">
+        <i class="fas fa-palette"></i>
+        <h2>منتقي الألوان</h2>
+        <p>اختيار ونسخ الألوان.</p>
     </div>
 
-</section>
+</main>
 
-<!-- WINDOW -->
-<div id="tool-window" class="tool-window hidden">
+<div id="tool-window" class="tool-window hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="tool-content">
-        <span class="close">×</span>
-        <div id="tool-area"></div>
+        <span class="close" aria-label="Close Modal">×</span>
+        <div id="tool-area">
+            </div>
     </div>
 </div>
 
 <footer>
-    By HamidDev <a href="https://github.com/hamid-dev591/Everyday-Tools-1/" target="_blank">DownLoad File Of The Project</a>
+    By HamidDev <a href="https://github.com/hamid-dev591/Everyday-Tools-1/" target="_blank" rel="noopener noreferrer">DownLoad File Of The Project</a>
 </footer>
 
 <script src="script.js"></script>
