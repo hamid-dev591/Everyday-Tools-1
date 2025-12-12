@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #ff7ce5, #260033);
+    color: white;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ff69ff, #83f3ff);
+    background-clip: text;
+    color: transparent;
+}
+
+.tools {
+    display: grid;
+    gap: 20px;
+    padding: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.tool-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    padding: 20px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* MODAL */
+.tool-window {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.tool-content {
+    width: 90%;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.20);
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: #ff69ff;
+    border: none;
+    color: black;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #ffe96b;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.6;
+}

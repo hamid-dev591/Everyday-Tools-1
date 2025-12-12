@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Everyday Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1 class="title">Everyday Tools</h1>
+</header>
+
+<section class="tools">
+
+    <div class="tool-card" data-tool="textCounter">
+        <h2>Text Counter</h2>
+        <p>Count words & characters.</p>
+    </div>
+
+    <div class="tool-card" data-tool="passwordGen">
+        <h2>Password Generator</h2>
+        <p>Create strong passwords.</p>
+    </div>
+
+    <div class="tool-card" data-tool="qrGen">
+        <h2>QR Generator</h2>
+        <p>Generate QR codes instantly.</p>
+    </div>
+
+    <div class="tool-card" data-tool="jsonFormatter">
+        <h2>JSON Formatter</h2>
+        <p>Clean & beautify JSON.</p>
+    </div>
+
+    <div class="tool-card" data-tool="notes">
+        <h2>Notes</h2>
+        <p>Save notes locally.</p>
+    </div>
+
+    <div class="tool-card" data-tool="colorPicker">
+        <h2>Color Picker</h2>
+        <p>Select & copy colors.</p>
+    </div>
+
+</section>
+
+<!-- WINDOW -->
+<div id="tool-window" class="tool-window hidden">
+    <div class="tool-content">
+        <span class="close">×</span>
+        <div id="tool-area"></div>
+    </div>
+</div>
+
+<footer>
+    By HamidDev
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
