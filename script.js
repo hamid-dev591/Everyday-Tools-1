@@ -17,16 +17,14 @@ function initTextCounter() {
     `;
 
     const textInput = document.getElementById("textInput");
-    // استخدام 'input' لعد فوري دون الحاجة لزر
     textInput.addEventListener("input", countText);
-    countText(); // العد الأولي إذا كان هناك نص محفوظ
+    countText();
 }
 
 function countText() {
     const textInput = document.getElementById("textInput");
     const resultElement = document.getElementById("result");
     const text = textInput.value;
-    // تصفية السلاسل الفارغة من المصفوفة
     const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
     
     resultElement.innerHTML = 
@@ -44,7 +42,6 @@ function initPasswordGen() {
 }
 
 function generatePassword() {
-    // يمكن جعل طول كلمة المرور خياراً، لكن 16 هو معيار جيد
     const length = 16;
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
     
@@ -68,7 +65,7 @@ function initQrGen() {
     const qrGenerateBtn = document.getElementById("qrGenerateBtn");
     
     qrGenerateBtn.addEventListener("click", makeQR);
-    qrText.addEventListener("input", makeQR); // توليد فوري أثناء الكتابة
+    qrText.addEventListener("input", makeQR);
 }
 
 function makeQR() {
@@ -80,7 +77,6 @@ function makeQR() {
         return;
     }
 
-    // استخدام حجم أصغر افتراضياً 150x150
     const url = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(text);
     qrOutput.innerHTML = `<img src="${url}" alt="QR Code for ${text}">`;
 }
@@ -100,12 +96,11 @@ function formatJSON() {
     try {
         const input = document.getElementById("jsonInput").value;
         const parsed = JSON.parse(input);
-        // تنسيق JSON بمسافة بادئة (Indentation) 4
         document.getElementById("jsonResult").innerText = JSON.stringify(parsed, null, 4);
         document.getElementById("jsonResult").style.color = 'white';
     } catch (err) {
         document.getElementById("jsonResult").innerText = "❌ JSON غير صالح. يرجى التحقق من الأقواس وعلامات الاقتباس.";
-        document.getElementById("jsonResult").style.color = '#ff6969'; // لون خطأ
+        document.getElementById("jsonResult").style.color = '#ff6969';
     }
 }
 
@@ -122,7 +117,6 @@ function initNotes() {
 
 function saveNotes() {
     localStorage.setItem("notes", document.getElementById("notesBox").value);
-    // إعطاء ملاحظات للمستخدم
     const saveBtn = document.getElementById("saveNotesBtn");
     saveBtn.innerText = "✓ تم الحفظ!";
     setTimeout(() => {
@@ -143,7 +137,6 @@ function initColorPicker() {
     const colorCode = document.getElementById("colorCode");
 
     colorInput.addEventListener("input", e => {
-        // تحديث النص واللون الفوري
         const color = e.target.value.toUpperCase();
         colorCode.innerText = color;
         colorCode.style.backgroundColor = color;
@@ -151,11 +144,191 @@ function initColorPicker() {
     });
 }
 
+// 7. حاسبة وقت القراءة والمقاييس (Reading Time Calculator)
+function initReadTimeCalculator() {
+    toolArea.innerHTML = `
+        <h2 id="modal-title">حاسبة وقت القراءة والمقاييس</h2>
+        <p>الصق النص أو اكتبه لحساب المقاييس المختلفة ووقت القراءة المقدر.</p>
+        <textarea id="readTextInput" placeholder="الصق النص هنا..." rows="10"></textarea>
+        
+        <div id="readTimeResult" class="result-box">
+            <h4>📊 المقاييس الأساسية</h4>
+            <div id="counts">
+                <p><strong>الكلمات:</strong> <span id="wordCount">0</span></p>
+                <p><strong>الأحرف (بما في ذلك المسافات):</strong> <span id="charCount">0</span></p>
+                <p><strong>الأسطر:</strong> <span id="lineCount">0</span></p>
+            </div>
+            
+            <h4>⏱️ وقت القراءة المقدر</h4>
+            <div id="timeEstimate">
+                <p><strong>الوقت المقدر:</strong> <span id="readTime">0 دقيقة</span></p>
+            </div>
+            
+            <h4>📄 تقدير حجم الصفحة (A4)</h4>
+            <div id="pageEstimate">
+                <p><strong>عدد الصفحات:</strong> <span id="pageCount">0</span> صفحة</p>
+            </div>
+        </div>
+    `;
+
+    const textInput = document.getElementById("readTextInput");
+    textInput.addEventListener("input", calculateReadTime);
+    calculateReadTime();
+}
+
+function calculateReadTime() {
+    const textInput = document.getElementById("readTextInput");
+    const text = textInput.value;
+    
+    // 1. حساب المقاييس الأساسية
+    const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+    const characters = text.length;
+    const lines = text.length > 0 ? (text.split('\n').length) : 0; 
+
+    // 2. حساب وقت القراءة
+    const WPM = 250;
+    const minutesDecimal = words / WPM;
+    const minutes = Math.ceil(minutesDecimal); 
+    
+    let timeOutput;
+    if (words === 0) {
+        timeOutput = `0 دقيقة`;
+    } else if (minutes < 1) {
+        timeOutput = `أقل من دقيقة واحدة`;
+    } else {
+        timeOutput = `${minutes} دقيقة`;
+    }
+
+    // 3. تقدير حجم الصفحة (A4)
+    const CHARS_PER_PAGE = 2500;
+    const pages = characters > 0 ? (characters / CHARS_PER_PAGE) : 0;
+    const pagesRounded = pages.toFixed(1);
+
+    // 4. تحديث الواجهة (DOM)
+    document.getElementById('wordCount').innerText = words.toLocaleString('ar');
+    document.getElementById('charCount').innerText = characters.toLocaleString('ar');
+    document.getElementById('lineCount').innerText = lines.toLocaleString('ar');
+    document.getElementById('readTime').innerText = timeOutput;
+    document.getElementById('pageCount').innerText = pagesRounded.toLocaleString('ar');
+}
+
+
+// *****************************************************************
+// 8. قائمة المهام (To-Do List)
+// *****************************************************************
+
+const STORAGE_KEY = 'todoTasks';
+
+function initToDoList() {
+    toolArea.innerHTML = `
+        <h2 id="modal-title">قائمة المهام (To-Do List)</h2>
+        <input type="text" id="newTaskInput" placeholder="أضف مهمة جديدة...">
+        <button id="addTaskBtn">إضافة مهمة</button>
+        <div id="todoListContainer">
+            <ul id="taskList"></ul>
+        </div>
+    `;
+
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const newTaskInput = document.getElementById('newTaskInput');
+    
+    addTaskBtn.addEventListener('click', addTask);
+    newTaskInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addTask();
+        }
+    });
+
+    loadTasks();
+}
+
+function saveTasks(tasks) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const taskList = document.getElementById('taskList');
+    
+    if (!taskList) return;
+
+    taskList.innerHTML = '';
+    
+    tasks.forEach(task => {
+        renderTaskItem(task);
+    });
+}
+
+function renderTaskItem(task) {
+    const taskList = document.getElementById('taskList');
+    const listItem = document.createElement('li');
+    listItem.className = 'todo-item';
+    if (task.completed) {
+        listItem.classList.add('completed');
+    }
+    
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = task.completed;
+    checkbox.addEventListener('change', () => toggleTaskCompletion(task.id));
+
+    const taskText = document.createElement('span');
+    taskText.innerText = task.text;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.className = 'delete-task-btn';
+    deleteBtn.addEventListener('click', () => deleteTask(task.id));
+
+    listItem.appendChild(checkbox);
+    listItem.appendChild(taskText);
+    listItem.appendChild(deleteBtn);
+    taskList.appendChild(listItem);
+}
+
+function addTask() {
+    const input = document.getElementById('newTaskInput');
+    const text = input.value.trim();
+
+    if (text === '') return;
+
+    const newTask = {
+        id: Date.now(),
+        text: text,
+        completed: false,
+    };
+
+    const tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    tasks.push(newTask);
+    saveTasks(tasks);
+
+    renderTaskItem(newTask);
+    input.value = '';
+}
+
+function toggleTaskCompletion(id) {
+    const tasks = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const taskIndex = tasks.findIndex(task => task.id === id);
+
+    if (taskIndex > -1) {
+        tasks[taskIndex].completed = !tasks[taskIndex].completed;
+        saveTasks(tasks);
+        loadTasks();
+    }
+}
+
+function deleteTask(id) {
+    let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    tasks = tasks.filter(task => task.id !== id);
+    saveTasks(tasks);
+    loadTasks();
+}
+
 // --------------------------------------------------
 // II. وظيفة إدارة الأدوات الرئيسية
 // --------------------------------------------------
 
-// كائن لربط مفتاح الأداة بالدالة المنفذة
+// كائن لربط مفتاح الأداة بالدالة المنفذة (تم التحديث هنا)
 const toolLoaders = {
     textCounter: initTextCounter,
     passwordGen: initPasswordGen,
@@ -163,12 +336,12 @@ const toolLoaders = {
     jsonFormatter: initJsonFormatter,
     notes: initNotes,
     colorPicker: initColorPicker,
+    readTime: initReadTimeCalculator, // الأداة السابقة
+    todoList: initToDoList, // الأداة الجديدة
 };
 
 function openTool(tool) {
-    // التحقق أولاً من وجود دالة محملة لهذه الأداة
     if (toolLoaders[tool]) {
-        // فتح المودال ثم تحميل المحتوى
         modal.classList.remove("hidden");
         toolLoaders[tool]();
     } else {

@@ -19,7 +19,7 @@ body {
     font-family: 'Inter', sans-serif;
     background: var(--main-bg);
     color: white;
-    min-height: 100vh; /* تأكد من تغطية الخلفية للصفحة بالكامل */
+    min-height: 100vh;
 }
 
 header {
@@ -28,12 +28,12 @@ header {
 }
 
 .title {
-    font-size: clamp(32px, 5vw, 48px); /* استخدام clamp لخط مستجيب */
+    font-size: clamp(32px, 5vw, 48px);
     font-weight: 800;
     letter-spacing: 2px;
     background: linear-gradient(90deg, var(--primary-color), #83f3ff);
     background-clip: text;
-    -webkit-background-clip: text; /* دعم أفضل للمتصفحات */
+    -webkit-background-clip: text;
     color: transparent;
 }
 
@@ -41,10 +41,9 @@ header {
     display: grid;
     gap: 20px;
     padding: 25px;
-    /* تحسين العرض على الشاشات الصغيرة والكبيرة */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     max-width: 1200px;
-    margin: 0 auto; /* توسيط الحاوية */
+    margin: 0 auto;
 }
 
 .tool-card {
@@ -52,8 +51,8 @@ header {
     border: 1px solid var(--card-border);
     backdrop-filter: blur(15px);
     border-radius: 18px;
-    padding: 25px; /* زيادة التباعد الداخلي */
-    transition: 0.3s ease; /* تبطيء الانتقال قليلاً */
+    padding: 25px;
+    transition: 0.3s ease;
     cursor: pointer;
     text-align: center;
 }
@@ -61,7 +60,7 @@ header {
 .tool-card i {
     font-size: 40px;
     margin-bottom: 15px;
-    color: #83f3ff; /* لون الأيقونة */
+    color: #83f3ff;
 }
 
 .tool-card h2 {
@@ -75,9 +74,9 @@ header {
 }
 
 .tool-card:hover {
-    transform: translateY(-6px); /* زيادة تأثير الارتفاع */
+    transform: translateY(-6px);
     background: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* إضافة ظل بسيط */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 /* MODAL */
@@ -87,7 +86,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.7); /* تغطية أغمق قليلاً */
+    background: rgba(0,0,0,0.7);
     backdrop-filter: blur(12px);
     z-index: 1000;
 }
@@ -97,14 +96,14 @@ header {
 }
 
 .tool-content {
-    width: 95%; /* أفضل على الهاتف */
+    width: 95%;
     max-width: 650px;
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(25px); /* زيادة تأثير الضبابية */
+    backdrop-filter: blur(25px);
     border-radius: 18px;
     padding: 30px;
     border: 1px solid rgba(255,255,255,0.25);
-    animation: pop 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* حركة أكثر ديناميكية */
+    animation: pop 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 
@@ -114,11 +113,11 @@ header {
 }
 
 .close {
-    float: left; /* تم تعديل الاتجاه */
+    float: left;
     cursor: pointer;
     font-size: 36px;
     line-height: 1;
-    color: #ffcccc; /* لون مغلق مميز */
+    color: #ffcccc;
     transition: color 0.2s;
 }
 
@@ -127,16 +126,16 @@ header {
 }
 
 /* Form Elements */
-textarea, input[type="text"], input[type="color"] {
+textarea, input[type="text"], input[type="color"], #newTaskInput {
     width: 100%;
-    padding: 15px; /* زيادة الحجم قليلاً */
+    padding: 15px;
     margin-top: 15px;
     background: rgba(255,255,255,0.25);
     border: none;
     color: white;
     border-radius: 12px;
     font-size: 16px;
-    resize: vertical; /* السماح بتغيير حجم النص فقط عمودياً */
+    resize: vertical;
 }
 
 /* نمط خاص لمدخل اللون */
@@ -179,13 +178,13 @@ button:hover {
 
 /* منسق JSON */
 #jsonResult {
-    white-space: pre-wrap; /* يسمح بالتفاف النص */
+    white-space: pre-wrap;
     word-wrap: break-word;
     margin-top: 20px;
     padding: 15px;
     border-radius: 12px;
     background: #0d0d0d;
-    overflow-x: auto; /* للسماح بالتمرير الأفقي إذا كان JSON كبيراً */
+    overflow-x: auto;
     border: 1px solid #1a1a1a;
 }
 
@@ -226,4 +225,107 @@ footer a {
     .tool-card {
         padding: 20px;
     }
+}
+
+/* --- أنماط خاصة بحاسبة وقت القراءة والمقاييس --- */
+.result-box {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.result-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+
+#counts p, #timeEstimate p, #pageEstimate p {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    margin: 0;
+    font-size: 17px;
+}
+
+#counts span, #timeEstimate span, #pageEstimate span {
+    font-weight: 800;
+    color: var(--hover-color);
+}
+
+/* --- أنماط خاصة بقائمة المهام (To-Do List) --- */
+
+#todoListContainer {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+    appearance: none; 
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.todo-item input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* تنسيق نص المهمة */
+.todo-item span {
+    flex-grow: 1;
+    font-size: 17px;
+    transition: all 0.3s;
+}
+
+/* نمط الإكمال: شطب النص وتغيير لون الخلفية */
+.todo-item.completed span {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* زر الحذف */
+.delete-task-btn {
+    background: none;
+    border: none;
+    color: #ff6969;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    margin-right: 0; 
+    width: auto;
+    transition: color 0.2s;
+}
+
+.delete-task-btn:hover {
+    color: #ff3d3d;
 }
