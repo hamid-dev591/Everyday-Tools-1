@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="مجموعة من الأدوات اليومية المفيدة: عداد نصوص، مولد كلمات مرور، منسق JSON، ومزيد.">
-    <title>Everyday Tools - أدوات يومية</title>
+    <title>Everyday Tools - أدوات حميد الشاملة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,67 +15,89 @@
 </header>
 
 <main class="tools">
-
-    <div class="tool-card" data-tool="textCounter" role="button" aria-label="Text Counter: Count words & characters.">
+    <div class="tool-card" data-tool="textCounter" role="button">
         <i class="fas fa-file-alt"></i>
         <h2>عداد النصوص</h2>
         <p>عد الكلمات والأحرف.</p>
     </div>
 
-    <div class="tool-card" data-tool="passwordGen" role="button" aria-label="Password Generator: Create strong passwords.">
+    <div class="tool-card" data-tool="passwordGen" role="button">
         <i class="fas fa-key"></i>
         <h2>مولد كلمات المرور</h2>
         <p>إنشاء كلمات مرور قوية.</p>
     </div>
 
-    <div class="tool-card" data-tool="qrGen" role="button" aria-label="QR Generator: Generate QR codes instantly.">
+    <div class="tool-card" data-tool="qrGen" role="button">
         <i class="fas fa-qrcode"></i>
         <h2>مولد رمز QR</h2>
         <p>توليد رموز QR فوراً.</p>
     </div>
 
-    <div class="tool-card" data-tool="jsonFormatter" role="button" aria-label="JSON Formatter: Clean & beautify JSON.">
+    <div class="tool-card" data-tool="jsonFormatter" role="button">
         <i class="fas fa-code"></i>
         <h2>منسق JSON</h2>
         <p>تنظيف وتجميل بيانات JSON.</p>
     </div>
 
-    <div class="tool-card" data-tool="readTime" role="button" aria-label="Reading Time Calculator: Estimate how long it takes to read a text.">
+    <div class="tool-card" data-tool="readTime" role="button">
         <i class="fas fa-book-open"></i>
         <h2>حاسبة وقت القراءة</h2>
-        <p>حساب الكلمات، الأسطر، الصفحات ووقت القراءة.</p>
+        <p>حساب الكلمات ووقت القراءة.</p>
     </div>
 
-    <div class="tool-card" data-tool="todoList" role="button" aria-label="To-Do List: Manage your tasks saved locally.">
+    <div class="tool-card" data-tool="todoList" role="button">
         <i class="fas fa-list-check"></i>
         <h2>قائمة المهام</h2>
-        <p>تنظيم وإدارة المهام (حفظ محلي).</p>
+        <p>تنظيم وإدارة المهام.</p>
     </div>
 
-    <div class="tool-card" data-tool="notes" role="button" aria-label="Notes: Save notes locally.">
+    <div class="tool-card" data-tool="notes" role="button">
         <i class="fas fa-sticky-note"></i>
         <h2>مفكرتي</h2>
         <p>حفظ الملاحظات محلياً.</p>
     </div>
 
-    <div class="tool-card" data-tool="colorPicker" role="button" aria-label="Color Picker: Select & copy colors.">
+    <div class="tool-card" data-tool="colorPicker" role="button">
         <i class="fas fa-palette"></i>
         <h2>منتقي الألوان</h2>
         <p>اختيار ونسخ الألوان.</p>
     </div>
 
+    <div class="tool-card" data-tool="hashtagGen" role="button">
+        <i class="fas fa-hashtag"></i>
+        <h2>مولد الوسوم</h2>
+        <p>إنشاء أوسمة (Hashtags) رائجة.</p>
+    </div>
+
+    <div class="tool-card" data-tool="timezoneChecker" role="button">
+        <i class="fas fa-globe"></i>
+        <h2>موقيت الدول</h2>
+        <p>التوقيت العالمي المباشر.</p>
+    </div>
+
+    <div class="tool-card" data-tool="imageResizer" role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+        <h2>تغيير حجم الصور</h2>
+        <p>مقاسات السوشيال ميديا.</p>
+    </div>
+
+    <div class="tool-card" data-tool="currencyConv" role="button">
+        <i class="fas fa-money-bill-wave"></i>
+        <h2>محول العملات</h2>
+        <p>تحويل سريع بين العملات.</p>
+    </div>
+
 </main>
 
-<div id="tool-window" class="tool-window hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div id="tool-window" class="tool-window hidden" role="dialog" aria-modal="true">
     <div class="tool-content">
-        <span class="close" aria-label="Close Modal">×</span>
-        <div id="tool-area">
-            </div>
+        <span class="close">×</span>
+        <div id="tool-area"></div>
     </div>
 </div>
 
 <footer>
-    By HamidDev <a href="https://github.com/hamid-dev591/Everyday-Tools-1/" target="_blank" rel="noopener noreferrer">DownLoad File Of The Project</a>
+    By HamidDev <a href="https://github.com/hamid-dev591/Everyday-Tools-1/" target="_blank">DownLoad Project</a>
 </footer>
 
 <script src="script.js"></script>
